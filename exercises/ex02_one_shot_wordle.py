@@ -10,6 +10,7 @@ YELLOW_BOX: str = '\U0001F7E8'
 
 
 def read_guess() -> str:
+    """Prompts for input whose `len` matches that of the secret word. Continually re-prompts until valid input is provided."""
     required_len: int = len(SECRET_WORD)
     guess: str = input(f'What is your {required_len}-letter guess? ')
     while len(guess) != required_len:
@@ -18,6 +19,7 @@ def read_guess() -> str:
 
 
 def is_present(src: str, char: str) -> bool:
+    """Returns True if `char` is present in `src`. Returns False otherwise."""
     idx: int = 0
     while idx < len(src):
         if src[idx] == char:
