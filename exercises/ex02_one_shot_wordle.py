@@ -9,38 +9,31 @@ GREEN_BOX: str = '\U0001F7E9'
 YELLOW_BOX: str = '\U0001F7E8'
 
 
-def read_guess() -> str:
-    """Prompts for input whose `len` matches that of the secret word. Continually re-prompts until valid input is provided."""
-    required_len: int = len(SECRET_WORD)
-    guess: str = input(f'What is your {required_len}-letter guess? ')
-    while len(guess) != required_len:
-        guess = input(f'That was not {required_len} letters! Try again: ')
-    return guess
+required_len: int = len(SECRET_WORD)
+guess: str = input(f'What is your {required_len}-letter guess? ')
+while len(guess) != required_len:
+    guess = input(f'That was not {required_len} letters! Try again: ')
 
-
-def is_present(src: str, char: str) -> bool:
-    """Returns True if `char` is present in `src`. Returns False otherwise."""
-    idx: int = 0
-    while idx < len(src):
-        if src[idx] == char:
-            return True
-        idx += 1
-    return False
-
-
-guess: str = read_guess()
 result: str = ''
-idx: int = 0
+guess_idx: int = 0
 num_correct_chars: int = 0
-while idx < len(guess):
-    if guess[idx] == SECRET_WORD[idx]:
+while guess_idx < len(guess):
+    if guess[guess_idx] == SECRET_WORD[guess_idx]:
         result += GREEN_BOX
         num_correct_chars += 1
-    elif is_present(SECRET_WORD, guess[idx]):
-        result += YELLOW_BOX
     else:
-        result += WHITE_BOX
-    idx += 1
+        secret_idx: int = 0
+        present = False
+        while secret_idx < len(SECRET_WORD):
+            if SECRET_WORD[secret_idx] == guess[guess_idx]:
+                present = True
+                break
+            secret_idx += 1
+        if present:
+            result += YELLOW_BOX
+        else:
+            result += WHITE_BOX
+    guess_idx += 1
 
 print(result)
 
