@@ -2,8 +2,11 @@
 
 __author__ = "730718389"
 
+
 def all(numbers: list[int], match: int) -> bool:
-    """`all` accepts a list of integers `nubmers` and an integer `match` and returns `True` if all items in the list are equivalent to `match`"""
+    """`all` accepts a list of integers `nubmers` and an integer `match` and returns `True` if all items in the list are equivalent to `match`."""
+    if len(numbers) == 0:
+        return False
     idx: int = 0
     while idx < len(numbers):
         if numbers[idx] != match:
@@ -13,9 +16,9 @@ def all(numbers: list[int], match: int) -> bool:
 
 
 def max(numbers: list[int]) -> int:
-    """`max` accepts a list of integers `numbers` and returns the integer in the list with the greatest value"""
+    """`max` accepts a list of integers `numbers` and returns the integer in the list with the greatest value."""
     if len(numbers) == 0:
-        return ValueError("max() arg is an empty List")
+        raise ValueError("max() arg is an empty List")
     current_max: int = numbers[0]
     idx: int = 1
     while idx < len(numbers):
